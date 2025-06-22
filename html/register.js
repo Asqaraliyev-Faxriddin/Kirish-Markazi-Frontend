@@ -25,7 +25,7 @@ document.getElementById("registerForm").addEventListener("submit", async functio
     }
 
     // To‘g‘ridan-to‘g‘ri frontend faylingiz portiga yo‘naltiring
-    window.location.href = "https://kirish-markazi-backend.onrender.com/verify.html";
+    window.location.href = "https://kirish-markazi-frontend.onrender.com//verify.html";
 
   } catch (err) {
     document.getElementById("registerResult").innerText = "Serverga ulanib bo'lmadi!";
