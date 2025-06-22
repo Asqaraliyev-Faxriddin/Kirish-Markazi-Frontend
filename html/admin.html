@@ -20,50 +20,53 @@
   <p id="error"></p>
 
   <script>
-    document.getElementById("adminForm").addEventListener("submit", async function (e) {
-      e.preventDefault();
+    const backendURL = "https://kirish-markazi-backend.onrender.com"; // bu sizning backend url'ingiz
 
-      const user = {
-        username: document.getElementById("username").value,
-        email: document.getElementById("email").value,
-        password: document.getElementById("password").value,
-        repeat_password: document.getElementById("repeat_password").value
-      };
+document.getElementById("adminForm").addEventListener("submit", async function (e) {
+  e.preventDefault();
 
-      try {
-        const res = await fetch("http://localhost:3000/auth/add/admin", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`
-          },
-          body: JSON.stringify(user)
-        });
+  const user = {
+    username: document.getElementById("username").value,
+    email: document.getElementById("email").value,
+    password: document.getElementById("password").value,
+    repeat_password: document.getElementById("repeat_password").value
+  };
 
-        const data = await res.json();
-
-        if (!res.ok) {
-          document.getElementById("error").innerText = data.message || "Xatolik yuz berdi!";
-          document.getElementById("result").innerText = "";
-          return;
-        }
-
-        document.getElementById("result").innerText = "✅ Admin muvaffaqiyatli qo‘shildi!";
-        document.getElementById("error").innerText = "";
-        window.location.href = "users-panel.html";
-        document.getElementById("adminForm").reset();
-
-     
-        setTimeout(() => {
-          window.location.href = "user-panel.html";
-        }, 3000);
-
-      } catch (err) {
-        document.getElementById("error").innerText = "🌐 Serverga ulanib bo‘lmadi!";
-        document.getElementById("result").innerText = "";
-        console.error("Xatolik:", err);
-      }
+  try {
+    const res = await fetch(`${backendURL}/auth/add/admin`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access_token")}`
+      },
+      body: JSON.stringify(user)
     });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      document.getElementById("error").innerText = Array.isArray(data.message)
+        ? data.message.join("\n")
+        : data.message || "Xatolik yuz berdi!";
+      document.getElementById("result").innerText = "";
+      return;
+    }
+
+    document.getElementById("result").innerText = "✅ Admin muvaffaqiyatli qo‘shildi!";
+    document.getElementById("error").innerText = "";
+    document.getElementById("adminForm").reset();
+
+    setTimeout(() => {
+      window.location.href = "users-panel.html";
+    }, 3000);
+
+  } catch (err) {
+    document.getElementById("error").innerText = "🌐 Serverga ulanib bo‘lmadi!";
+    document.getElementById("result").innerText = "";
+    console.error("Xatolik:", err);
+  }
+});
+
   </script>
 </body>
 </html>

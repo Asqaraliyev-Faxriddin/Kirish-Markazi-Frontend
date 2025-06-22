@@ -1,4 +1,4 @@
-// === Auth bilan Fetch ===
+// === Token orqali fetch ===
 async function fetchWithAuth(url, options = {}) {
     const token = localStorage.getItem("access_token");
   
@@ -25,7 +25,7 @@ async function fetchWithAuth(url, options = {}) {
     return res;
   }
   
-  // === Logout ===
+  // === Logout funksiyasi ===
   function logout() {
     localStorage.clear();
     window.location.href = "login.html";
@@ -70,7 +70,10 @@ async function fetchWithAuth(url, options = {}) {
   
   // === Faqat o‘zini ko‘rsatish ===
   function loadSelf() {
-    fetchWithAuth("https://kirish-markazi-backend.onrender.com/api/user/me", { method: "POST" })
+    fetchWithAuth("https://kirish-markazi-backend.onrender.com/api/user/me", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    })
       .then(async (res) => {
         const data = await res.json();
         if (!res.ok) throw new Error(data.message || "O‘zingizni topib bo‘lmadi!");
@@ -97,7 +100,9 @@ async function fetchWithAuth(url, options = {}) {
   function deleteUser(id) {
     if (!confirm("Haqiqatan ham o'chirmoqchimisiz?")) return;
   
-    fetchWithAuth(`https://kirish-markazi-backend.onrender.com/api/user/delete/${id}`, { method: "DELETE" })
+    fetchWithAuth(`https://kirish-markazi-backend.onrender.com/api/user/delete/${id}`, {
+      method: "DELETE"
+    })
       .then(() => loadUsers())
       .catch((err) => {
         alert("O‘chirishda xatolik: " + err.message);
@@ -136,7 +141,9 @@ async function fetchWithAuth(url, options = {}) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username: u, email: e, role: r }),
     })
-      .then((res) => res.ok ? loadUsers() : res.json().then((d) => alert(d.message)))
+      .then((res) =>
+        res.ok ? loadUsers() : res.json().then((d) => alert(d.message))
+      )
       .catch(console.error);
   }
   

@@ -26,7 +26,8 @@ document.getElementById("registerForm").addEventListener("submit", async functio
       return;
     }
 
-    window.location.href = "https://kirish-markazi-frontend.onrender.com/verify.html";
+    // ✅ Muvaffaqiyatli bo'lsa, verify sahifasiga aniq yo'naltirish:
+    window.location.href = "https://kirish-markazi-frontend.onrender.com/verify.html"; // <-- To‘liq yo‘l
 
   } catch (err) {
     document.getElementById("registerResult").innerText = "Serverga ulanib bo'lmadi!";

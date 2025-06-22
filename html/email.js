@@ -12,13 +12,12 @@ document.getElementById("emailForm").addEventListener("submit", async (e) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("access_token")}`
+        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
       },
       body: JSON.stringify(data),
     });
 
     const result = await res.json();
-
     const resultElement = document.getElementById("emailResult");
 
     if (!res.ok) {
@@ -31,11 +30,11 @@ document.getElementById("emailForm").addEventListener("submit", async (e) => {
     resultElement.style.color = "green";
 
     setTimeout(() => {
-      window.location.href = "login.html";
+      window.location.href = "users-panel.html";
     }, 3000);
 
   } catch (err) {
-    document.getElementById("emailResult").innerText = "Serverga ulanib bo'lmadi!";
+    document.getElementById("emailResult").innerText = "🌐 Serverga ulanib bo‘lmadi!";
     console.error("Xatolik:", err);
   }
 });
