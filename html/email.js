@@ -32,7 +32,7 @@ document.getElementById("emailForm").addEventListener("submit", async (e) => {
   };
 
   try {
-    const res = await fetch("http://localhost:3000/auth/send/email", {
+    const res = await fetch("https://kirish-markazi-backend.onrender.com/auth/send/email", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

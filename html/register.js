@@ -9,7 +9,7 @@ document.getElementById("registerForm").addEventListener("submit", async functio
   };
 
   try {
-    const res = await fetch("http://localhost:3000/auth/register", {
+    const res = await fetch("https://kirish-markazi-backend.onrender.com/auth/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -25,7 +25,7 @@ document.getElementById("registerForm").addEventListener("submit", async functio
     }
 
     // To‘g‘ridan-to‘g‘ri frontend faylingiz portiga yo‘naltiring
-    window.location.href = "http://127.0.0.1:5500/verify.html";
+    window.location.href = "https://kirish-markazi-backend.onrender.com/verify.html";
 
   } catch (err) {
     document.getElementById("registerResult").innerText = "Serverga ulanib bo'lmadi!";

@@ -33,7 +33,7 @@ async function fetchWithAuth(url, options = {}) {
   
   // === Barcha foydalanuvchilarni yuklash ===
   function loadUsers() {
-    fetchWithAuth("http://localhost:3000/api/users")
+    fetchWithAuth("https://kirish-markazi-backend.onrender.com/api/users")
       .then(async (res) => {
         const data = await res.json();
         if (!res.ok) throw new Error(data.message || "Xatolik");
@@ -70,7 +70,7 @@ async function fetchWithAuth(url, options = {}) {
   
   // === Faqat o‘zini ko‘rsatish ===
   function loadSelf() {
-    fetchWithAuth("http://localhost:3000/api/user/me", { method: "POST" })
+    fetchWithAuth("https://kirish-markazi-backend.onrender.com/api/user/me", { method: "POST" })
       .then(async (res) => {
         const data = await res.json();
         if (!res.ok) throw new Error(data.message || "O‘zingizni topib bo‘lmadi!");
@@ -95,9 +95,9 @@ async function fetchWithAuth(url, options = {}) {
   
   // === Foydalanuvchini o‘chirish ===
   function deleteUser(id) {
-    if (!confirm("Haqiqatan ham o‘chirmoqchimisiz?")) return;
+    if (!confirm("Haqiqatan ham o'chirmoqchimisiz?")) return;
   
-    fetchWithAuth(`http://localhost:3000/api/user/delete/${id}`, { method: "DELETE" })
+    fetchWithAuth(`https://kirish-markazi-backend.onrender.com/api/user/delete/${id}`, { method: "DELETE" })
       .then(() => loadUsers())
       .catch((err) => {
         alert("O‘chirishda xatolik: " + err.message);
@@ -131,7 +131,7 @@ async function fetchWithAuth(url, options = {}) {
     const e = document.getElementById(`email-${id}`).value;
     const r = document.getElementById(`role-${id}`).value;
   
-    fetchWithAuth(`http://localhost:3000/api/user/update/${id}`, {
+    fetchWithAuth(`https://kirish-markazi-backend.onrender.com/api/user/update/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username: u, email: e, role: r }),
