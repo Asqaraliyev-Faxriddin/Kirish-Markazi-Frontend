@@ -20,12 +20,13 @@ document.getElementById("registerForm").addEventListener("submit", async functio
     const data = await res.json();
 
     if (!res.ok) {
-      document.getElementById("registerResult").innerText = data.message || "Xatolik yuz berdi!";
+      document.getElementById("registerResult").innerText = Array.isArray(data.message)
+        ? data.message.join("\n")
+        : data.message || "Xatolik yuz berdi!";
       return;
     }
 
-    // To‘g‘ridan-to‘g‘ri frontend faylingiz portiga yo‘naltiring
-    window.location.href = "https://kirish-markazi-frontend.onrender.com//verify.html";
+    window.location.href = "https://kirish-markazi-frontend.onrender.com/verify.html";
 
   } catch (err) {
     document.getElementById("registerResult").innerText = "Serverga ulanib bo'lmadi!";
