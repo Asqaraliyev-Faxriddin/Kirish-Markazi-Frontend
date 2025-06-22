@@ -26,11 +26,17 @@ document.getElementById("registerForm").addEventListener("submit", async functio
       return;
     }
 
-    // ✅ Muvaffaqiyatli bo'lsa, verify sahifasiga aniq yo'naltirish:
-    window.location.href = "https://kirish-markazi-frontend.onrender.com/verify.html"; // <-- To‘liq yo‘l
+    // ✅ Backend token yuborayotgan bo‘lsa, shuni URLga qo‘shib verify sahifaga yo‘naltiramiz:
+    const token = data.token;
+    if (!token) {
+      document.getElementById("registerResult").innerText = "Token olinmadi. Backendni tekshiring!";
+      return;
+    }
+
+    window.location.href = `https://kirish-markazi-frontend.onrender.com/verify.html?token=${token}`;
 
   } catch (err) {
-    document.getElementById("registerResult").innerText = "Serverga ulanib bo'lmadi!";
+    document.getElementById("registerResult").innerText = "🌐 Serverga ulanib bo'lmadi!";
     console.error("Xatolik:", err);
   }
 });
