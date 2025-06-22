@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin qo'shish</title>
+  <link rel="stylesheet" href="style.css">
+  
+</head>
+<body>
+  <h2>Admin foydalanuvchi qo'shish</h2>
+  <form id="adminForm">
+    <input type="text" id="username" placeholder="Username" required />
+    <input type="email" id="email" placeholder="Email" required />
+    <input type="password" id="password" placeholder="Parol" required />
+    <input type="password" id="repeat_password" placeholder="Parolni tasdiqlang" required />
+    <button type="submit">➕ Qo‘shish</button>
+  </form>
+
+  <p id="result"></p>
+  <p id="error"></p>
+
+  <script>
+    document.getElementById("adminForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const user = {
+        username: document.getElementById("username").value,
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value,
+        repeat_password: document.getElementById("repeat_password").value
+      };
+
+      try {
+        const res = await fetch("http://localhost:3000/auth/add/admin", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+          },
+          body: JSON.stringify(user)
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          document.getElementById("error").innerText = data.message || "Xatolik yuz berdi!";
+          document.getElementById("result").innerText = "";
+          return;
+        }
+
+        document.getElementById("result").innerText = "✅ Admin muvaffaqiyatli qo‘shildi!";
+        document.getElementById("error").innerText = "";
+        window.location.href = "users-panel.html";
+        document.getElementById("adminForm").reset();
+
+     
+        setTimeout(() => {
+          window.location.href = "user-panel.html";
+        }, 3000);
+
+      } catch (err) {
+        document.getElementById("error").innerText = "🌐 Serverga ulanib bo‘lmadi!";
+        document.getElementById("result").innerText = "";
+        console.error("Xatolik:", err);
+      }
+    });
+  </script>
+</body>
+</html>

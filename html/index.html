@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <title>Ro'yxatdan o'tish</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f4f6f8;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    h1 {
+      color: #2f3542;
+    }
+
+    a {
+      color: #1e90ff;
+      text-decoration: none;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    form {
+      background-color: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    input {
+      padding: 12px;
+      font-size: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #1e90ff;
+      box-shadow: 0 0 0 3px rgba(30, 144, 255, 0.1);
+    }
+
+    button {
+      background-color: #00b894;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #019875;
+    }
+
+    #registerResult {
+      color: #d63031;
+      font-weight: 600;
+      margin-top: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📝 Ro'yxatdan o'tish</h1>
+  <a href="login.html">🔑 Tizimga kirish</a>
+
+  <form id="registerForm">
+    <input type="text" id="username" placeholder="👤 Username" required>
+    <input type="email" id="email" placeholder="📧 Email" required>
+    <input type="password" id="password" placeholder="🔒 Parol" required>
+    <input type="password" id="repeat_password" placeholder="🔁 Parolni takrorlang" required>
+    <button type="submit">✅ Ro'yxatdan o'tish</button>
+  </form>
+
+  <p id="registerResult"></p>
+
+  <script src="register.js"></script>
+</body>
+</html>

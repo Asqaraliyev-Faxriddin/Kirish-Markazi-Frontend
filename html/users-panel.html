@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Boshqaruv Paneli</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #f4f6f8;
+      color: #333;
+    }
+
+    header {
+      background-color: #2f3542;
+      color: white;
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .profile-info {
+      display: flex;
+      align-items: center;
+    }
+
+    .profile-info img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      margin-right: 15px;
+      object-fit: cover;
+    }
+
+    .panel-title {
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+    .actions button,
+    .actions a {
+      margin-left: 12px;
+      background-color: #1e90ff;
+      color: white;
+      border: none;
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .actions button:hover,
+    .actions a:hover {
+      background-color: #0c7cd5;
+    }
+
+    .container {
+      padding: 30px 40px;
+    }
+
+    #result {
+      color: #d63031;
+      font-weight: bold;
+      margin-bottom: 16px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 12px 16px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f1f2f6;
+      font-weight: 600;
+    }
+
+    tr:not(:last-child) {
+      border-bottom: 1px solid #f1f2f6;
+    }
+
+    button.edit-btn,
+    button.delete-btn {
+      padding: 6px 10px;
+      margin-right: 6px;
+      border-radius: 4px;
+      border: none;
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .edit-btn { background-color: #00b894; }
+    .edit-btn:hover { background-color: #019875; }
+
+    .delete-btn { background-color: #d63031; }
+    .delete-btn:hover { background-color: #c0392b; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="profile-info">
+      <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Foydalanuvchi" />
+      <div class="panel-title">👤 Boshqaruv Paneli</div>
+    </div>
+    <div class="actions">
+      <button onclick="loadUsers()">📋 Foydalanuvchilar</button>
+      <button onclick="loadSelf()">🙋 O‘zim</button>
+      <a href="admin.html">➕ Admin qo‘shish</a>
+      <button onclick="logout()">🚪 Chiqish</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <p id="result"></p>
+    <table id="userTable"></table>
+  </div>
+
+  <script src="users-panel.js"></script>
+</body>
+</html>
