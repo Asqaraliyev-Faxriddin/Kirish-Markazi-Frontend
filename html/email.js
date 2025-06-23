@@ -1,3 +1,35 @@
+// Foydalanuvchini va roli ADMIN yoki SUPERADMIN ekanini tekshirish
+(async () => {
+  const token = localStorage.getItem("access_token");
+  if (!token) {
+    alert("Avval tizimga kiring.");
+    window.location.href = "login.html";
+    return;
+  }
+
+  try {
+    const res = await fetch("https://kirish-markazi-backend.onrender.com/api/user/me", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const data = await res.json();
+
+    if (!res.ok || (data.role !== "ADMIN" && data.role !== "SUPERADMIN")) {
+      alert("Sizga email yuborish vakolati yo‘q!");
+      window.location.href = "users-panel.html";
+      return;
+    }
+  } catch (err) {
+    console.error("Xatolik:", err);
+    alert("Tizimda muammo. Qaytadan tizimga kiring.");
+    window.location.href = "login.html";
+  }
+})();
+
+// Email yuborish formasi
 document.getElementById("emailForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 

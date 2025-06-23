@@ -2,26 +2,27 @@
 <html lang="uz">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin qo'shish</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h2>Admin foydalanuvchi qo'shish</h2>
-  <form id="adminForm">
-    <input type="text" id="username" placeholder="Username" required />
-    <input type="email" id="email" placeholder="Email" required />
-    <input type="password" id="password" placeholder="Parol" required />
-    <input type="password" id="repeat_password" placeholder="Parolni tasdiqlang" required />
-    <button type="submit">➕ Qo‘shish</button>
-  </form>
-
-  <p id="result"></p>
-  <p id="error" style="color: red;"></p>
+  <div class="container">
+    <h2>Admin foydalanuvchi qo‘shish</h2>
+    <form id="adminForm">
+      <input type="text" id="username" placeholder="👤 Username" required />
+      <input type="email" id="email" placeholder="📧 Email" required />
+      <input type="password" id="password" placeholder="🔑 Parol" required />
+      <input type="password" id="repeat_password" placeholder="✅ Parolni tasdiqlang" required />
+      <button type="submit">➕ Qo‘shish</button>
+    </form>
+    <p id="result" class="success"></p>
+    <p id="error" class="error"></p>
+  </div>
 
   <script>
     const backendURL = "https://kirish-markazi-backend.onrender.com";
 
-    // 🔐 Token va rolni tekshirish
     (async () => {
       const token = localStorage.getItem("access_token");
       if (!token) {
@@ -45,13 +46,11 @@
           window.location.href = "users-panel.html";
         }
       } catch (err) {
-        console.error("Xatolik:", err);
-        alert("Tizimda nosozlik! Qayta urinib ko‘ring.");
+        alert("Tizimda nosozlik!");
         window.location.href = "login.html";
       }
     })();
 
-    // 📤 Admin qo‘shish
     document.getElementById("adminForm").addEventListener("submit", async function (e) {
       e.preventDefault();
 
@@ -93,7 +92,6 @@
       } catch (err) {
         document.getElementById("error").innerText = "🌐 Serverga ulanib bo‘lmadi!";
         document.getElementById("result").innerText = "";
-        console.error("Xatolik:", err);
       }
     });
   </script>

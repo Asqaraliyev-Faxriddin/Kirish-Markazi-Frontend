@@ -6,6 +6,10 @@
   <title>Boshqaruv Paneli</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap">
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
@@ -20,11 +24,13 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      flex-wrap: wrap;
     }
 
     .profile-info {
       display: flex;
       align-items: center;
+      margin-bottom: 10px;
     }
 
     .profile-info img {
@@ -40,9 +46,16 @@
       font-weight: 600;
     }
 
+    .actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
     .actions button,
     .actions a {
-      margin-left: 12px;
       background-color: #1e90ff;
       color: white;
       border: none;
@@ -108,6 +121,46 @@
 
     .delete-btn { background-color: #d63031; }
     .delete-btn:hover { background-color: #c0392b; }
+
+    /* Responsive styles */
+    @media (max-width: 768px) {
+      header {
+        padding: 16px 20px;
+      }
+      .container {
+        padding: 20px 20px;
+      }
+      .panel-title {
+        font-size: 20px;
+      }
+      .actions button,
+      .actions a {
+        padding: 8px 12px;
+        font-size: 14px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .profile-info, 
+      .actions {
+        width: 100%;
+        justify-content: space-between;
+      }
+      .actions {
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .container {
+        padding: 16px;
+      }
+      table, th, td {
+        font-size: 14px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -120,6 +173,7 @@
       <button onclick="loadUsers()">📋 Foydalanuvchilar</button>
       <button onclick="loadSelf()">🙋 O‘zim</button>
       <a href="admin.html">➕ Admin qo‘shish</a>
+      <a href="email.html">✉️ Email yuborish</a>
       <button onclick="logout()">🚪 Chiqish</button>
     </div>
   </header>

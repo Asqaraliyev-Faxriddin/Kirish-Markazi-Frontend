@@ -1,51 +1,90 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tasdiqlash yuborildi</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: sans-serif;
-      text-align: center;
-      margin-top: 100px;
+      background-color: #f4f6f8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      padding: 16px;
     }
+
+    .box {
+      background-color: white;
+      padding: 30px 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+
     h2 {
       color: green;
+      font-size: 22px;
+      margin-bottom: 12px;
     }
+
+    p {
+      font-size: 16px;
+      color: #2d3436;
+      margin-bottom: 10px;
+    }
+
     #timer {
       font-weight: bold;
       font-size: 20px;
+      color: #d63031;
+    }
+
+    @media (max-width: 480px) {
+      h2 {
+        font-size: 20px;
+      }
+
+      p, #timer {
+        font-size: 15px;
+      }
     }
   </style>
 </head>
 <body>
-  <h2>📧 Emailingizga tasdiqlash havolasi yuborildi!</h2>
-  <p>Iltimos, emailingizni tekshiring va linkni bosing.</p>
-  <p>Siz <span id="timer">25</span> soniyadan so‘ng avtomatik tizimga kirish sahifasiga o'tasiz.</p>
+  <div class="box">
+    <h2>📧 Emailingizga tasdiqlash havolasi yuborildi!</h2>
+    <p>Iltimos, emailingizni tekshiring va linkni bosing.</p>
+    <p>Siz <span id="timer">25</span> soniyadan so‘ng tizimga kirish sahifasiga o'tasiz.</p>
+  </div>
 
   <script>
-    // Har bir fayl boshida qo‘shing:
+    async function fetchWithAuth(url, options = {}) {
+      const headers = {
+        ...(options.headers || {}),
+        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+      };
 
-async function fetchWithAuth(url, options = {}) {
-  const headers = {
-    ...(options.headers || {}),
-    Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-  };
+      const res = await fetch(url, { ...options, headers });
 
-  const res = await fetch(url, { ...options, headers });
+      if (res.status === 401) {
+        localStorage.removeItem("access_token");
+        localStorage.removeItem("refresh_token");
+        alert("Sessiyangiz tugadi, iltimos qaytadan tizimga kiring.");
+        window.location.href = "login.html";
+        return Promise.reject(new Error("Unauthorized"));
+      }
 
-  if (res.status === 401) {
-    // Sessiya tugagan yoki token xato
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("refresh_token");
-    alert("Sessiyangiz tugadi, iltimos qaytadan tizimga kiring.");
-    window.location.href = "login.html";
-    return Promise.reject(new Error("Unauthorized"));
-  }
-
-  return res;
-}
-
+      return res;
+    }
 
     let second = 25;
     const timer = document.getElementById("timer");
@@ -56,7 +95,7 @@ async function fetchWithAuth(url, options = {}) {
 
       if (second <= 0) {
         clearInterval(countdown);
-        window.location.href = "login.html"; // login sahifaga o'tkazish
+        window.location.href = "login.html";
       }
     }, 1000);
   </script>

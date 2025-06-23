@@ -2,9 +2,14 @@
 <html lang="uz">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Email Yuborish</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: 'Inter', sans-serif;
       background-color: #f4f6f8;
@@ -15,21 +20,23 @@
     header {
       background-color: #2f3542;
       color: white;
-      padding: 20px 40px;
+      padding: 16px 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      flex-wrap: wrap;
     }
 
     header h1 {
       margin: 0;
-      font-size: 22px;
+      font-size: 20px;
     }
 
     nav {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 12px;
+      margin-top: 10px;
     }
 
     nav a, nav button {
@@ -44,29 +51,34 @@
       transition: background-color 0.3s ease;
     }
 
-    nav button:hover,
-    nav a:hover {
+    nav a:hover,
+    nav button:hover {
       background-color: #0c7cd5;
     }
 
     form {
       background-color: white;
       max-width: 500px;
-      margin: 50px auto;
-      padding: 30px;
+      margin: 40px auto;
+      padding: 24px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       border-radius: 10px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 14px;
     }
 
     input, textarea {
       padding: 12px;
-      font-size: 16px;
+      font-size: 15px;
       border: 1px solid #ccc;
       border-radius: 6px;
       outline: none;
+      width: 100%;
+    }
+
+    textarea {
+      resize: vertical;
     }
 
     button[type="submit"] {
@@ -90,6 +102,31 @@
       color: #d63031;
       font-weight: 600;
     }
+
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        margin-top: 10px;
+        flex-wrap: wrap;
+      }
+
+      form {
+        margin: 20px;
+        padding: 20px;
+      }
+
+      input, textarea {
+        font-size: 14px;
+      }
+
+      button[type="submit"] {
+        font-size: 15px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -102,8 +139,8 @@
   </header>
 
   <form id="emailForm">
-    <input id="toEmail" type="email" placeholder="Qabul qiluvchi email" required>
-    <input id="subject" type="text" placeholder="Sarlavha" required>
+    <input id="toEmail" type="email" placeholder="Qabul qiluvchi email" required />
+    <input id="subject" type="text" placeholder="Sarlavha" required />
     <textarea id="description" rows="4" placeholder="Xabar matni..."></textarea>
     <button type="submit">✉️ Yuborish</button>
   </form>
